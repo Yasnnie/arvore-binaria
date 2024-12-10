@@ -107,20 +107,31 @@ def create_tree():
             insert(root, new_node)
     return root
 
-def pre_ordem(root):
+def pre_order(root):
     print(root.value, end = " ")
     if root.left is not None:
-        pre_ordem(root.left)
+        pre_order(root.left)
     if root.right is not None:
-        pre_ordem(root.right)
+        pre_order(root.right)
 
 
-def pos_ordem(root):
+def post_order(root):
     if root.left is not None:
-        pos_ordem(root.left)
+        post_order(root.left)
     if root.right is not None:
-        pos_ordem(root.right)
+        post_order(root.right)
     print(root.value, end = " ")
+
+
+def simetric_order(root):
+    if root.left is not None:
+        simetric_order(root.left)
+
+    print(root.value, end = " ")
+    if root.right is not None:
+        simetric_order(root.right)
+
+
 
 
 #MAIN
@@ -133,7 +144,9 @@ while True:
     print("4. Pesquisar Valor")
     print("5. Pré-ordem")
     print("6. Pós-ordem")
-    print("7. Sair")
+    print("7. Simétrica")
+    print("8. Remover nó")
+    print("9. Sair")
     opcao = int(input("Escolha uma opção: "))
 
     if opcao == 1:
@@ -167,7 +180,7 @@ while True:
     elif opcao == 5:
         if root:
             print("\n\n")
-            pre_ordem(root)
+            pre_order(root)
         else:
             print("\n\nA árvore ainda não foi criada.")
 
@@ -175,11 +188,25 @@ while True:
     elif opcao == 6:
         if root:
             print("\n\n")
-            pos_ordem(root)
+            post_order(root)
         else:
             print("\n\nA árvore ainda não foi criada.")
 
     elif opcao == 7:
+        if root:
+            print("\n\n")
+            simetric_order(root)
+        else:
+            print("\n\nA árvore ainda não foi criada.")
+
+    elif opcao == 8:
+        if root:
+            print("\n\n")
+            simetric_order(root)
+        else:
+            print("\n\nA árvore ainda não foi criada.")
+
+    elif opcao == 9:
         print("\n\nSaindo...")
         break
 
