@@ -131,12 +131,22 @@ def simetric_order(root):
     if root.right is not None:
         simetric_order(root.right)
 
+def level_order(root):
+    queue = [root]
+
+    while len(queue) > 0:
+        current = queue.pop(0)
+        print(current.value, end = " ")
+        if current.left is not None:
+            queue.append(current.left)
+        if current.right is not None:
+            queue.append(current.right)
 
 def locate_min(node):
     current = node
     while current.left is not None:
         current = current.left
-        
+
     return current
 
 def remove_node(value, node):
@@ -171,8 +181,9 @@ while True:
     print("5. Pré-ordem")
     print("6. Pós-ordem")
     print("7. Simétrica")
-    print("8. Remover nó")
-    print("9. Sair")
+    print("8. Por level")
+    print("9. Remover nó")
+    print("10. Sair")
     opcao = int(input("Escolha uma opção: "))
 
     if opcao == 1:
@@ -226,6 +237,11 @@ while True:
             print("\n\nA árvore ainda não foi criada.")
 
     elif opcao == 8:
+        if root:            
+            level_order(root)
+        else:
+            print("\n\nA árvore ainda não foi criada.")
+    elif opcao == 9:
         if root:
             value = int(input("\n\nDigite o valor a ser removido: "))
             remove_node(value,root)
@@ -236,7 +252,7 @@ while True:
         else:
             print("\n\nA árvore ainda não foi criada.")
 
-    elif opcao == 9:
+    elif opcao == 10:
         print("\n\nSaindo...")
         break
 
