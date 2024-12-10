@@ -82,15 +82,15 @@ def search_value(node, value):
 
 
 #Ordenar a árvore
-def order_binary_heap(father, new_node):
+def insert(father, new_node):
     if father.value > new_node.value:
         if father.left is not None:
-            order_binary_heap(father.left, new_node)
+            insert(father.left, new_node)
         else:
             father.left = new_node
     else:
         if father.right is not None:
-            order_binary_heap(father.right, new_node)
+            insert(father.right, new_node)
         else:
             father.right = new_node
 
@@ -104,9 +104,23 @@ def create_tree():
         if root is None:
             root = new_node
         else:
-            order_binary_heap(root, new_node)
+            insert(root, new_node)
     return root
 
+def pre_ordem(root):
+    print(root.value, end = " ")
+    if root.left is not None:
+        pre_ordem(root.left)
+    if root.right is not None:
+        pre_ordem(root.right)
+
+
+def pos_ordem(root):
+    if root.left is not None:
+        pos_ordem(root.left)
+    if root.right is not None:
+        pos_ordem(root.right)
+    print(root.value, end = " ")
 
 
 #MAIN
@@ -117,7 +131,9 @@ while True:
     print("2. Total de Nós")
     print("3. Total de Folhas")
     print("4. Pesquisar Valor")
-    print("5. Sair")
+    print("5. Pré-ordem")
+    print("6. Pós-ordem")
+    print("7. Sair")
     opcao = int(input("Escolha uma opção: "))
 
     if opcao == 1:
@@ -149,6 +165,21 @@ while True:
             print("\n\nA árvore ainda não foi criada.")
 
     elif opcao == 5:
+        if root:
+            print("\n\n")
+            pre_ordem(root)
+        else:
+            print("\n\nA árvore ainda não foi criada.")
+
+
+    elif opcao == 6:
+        if root:
+            print("\n\n")
+            pos_ordem(root)
+        else:
+            print("\n\nA árvore ainda não foi criada.")
+
+    elif opcao == 7:
         print("\n\nSaindo...")
         break
 
