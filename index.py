@@ -132,7 +132,33 @@ def simetric_order(root):
         simetric_order(root.right)
 
 
+def locate_min(node):
+    current = node
+    while current.left is not None:
+        current = current.left
+        
+    return current
 
+def remove_node(value, node):
+    if node is None:
+        return None
+    elif value < node.value:
+         node.left = remove_node(value, node.left)
+    elif value > node.value:
+        node.right = remove_node(value,node.right)
+    elif node.left is not None and node.right is not None:
+        node_aux = locate_min(node.right)
+        print(node_aux)
+        node.value = node_aux.value
+        node.right = remove_node(node.value, node.right)
+    else:
+   
+        if node.left is not None:
+            return node.left
+        else:
+            return node.right
+    
+    return node
 
 #MAIN
 root = None
@@ -201,8 +227,12 @@ while True:
 
     elif opcao == 8:
         if root:
-            print("\n\n")
-            simetric_order(root)
+            value = int(input("\n\nDigite o valor a ser removido: "))
+            remove_node(value,root)
+
+            lines, *_ = display(root)
+            for line in lines:
+                print(line)
         else:
             print("\n\nA árvore ainda não foi criada.")
 
